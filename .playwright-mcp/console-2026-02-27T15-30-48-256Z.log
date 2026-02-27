@@ -1,0 +1,14 @@
+[     449ms] [WARNING] {msg: An error has occurred checking the feature gate. Only the first occurrence of this error is logged., gateName: post-office_choreographer_window_singleton, error: Error: Client must be initialized before using this method
+    at eb.value (https://cdn.loom.com/as…} @ https://cdn.loom.com/assets/js/5520-5d1609b2c10e4f3e.js:33
+[     573ms] [WARNING] Multiple versions of FeatureGateClients found on the current page.
+      The currently bound version is 0.0.0-development when module version 4.26.5 was loading. @ https://cdn.loom.com/assets/js/5520-5d1609b2c10e4f3e.js:32
+[     647ms] [WARNING] [zustand devtools middleware] Please install/enable Redux devtools extension @ https://cdn.loom.com/assets/js/5520-5d1609b2c10e4f3e.js:485
+[     684ms] [ERROR] Failed to load resource: net::ERR_FAILED @ chrome-extension://invalid/:0
+[     979ms] [ERROR] Failed to load resource: net::ERR_FAILED @ chrome-extension://invalid/:0
+[    1476ms] [WARNING] Player w/ mediaElement has been deprecated and will be removed in v5.0 . We are currently at version v4.9 . Additional information: Please migrate from initializing Player with a mediaElement; use the attach method instead. @ https://cdn.loom.com/assets/js/5520-5d1609b2c10e4f3e.js:485
+[    1477ms] [WARNING] streaming.useNativeHlsOnSafari configuration has been deprecated and will be removed in v5.0 . We are currently at version v4.9 . Additional information: Please Use streaming.useNativeHlsForFairPlay or streaming.preferNativeHls instead. @ https://cdn.loom.com/assets/js/5520-5d1609b2c10e4f3e.js:485
+[    1705ms] [WARNING] [GSI_LOGGER]: Your client application uses one of the Google One Tap prompt UI status methods that may stop functioning when FedCM becomes mandatory. Refer to the migration guide to update your code accordingly and opt-in to FedCM to test your changes. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#display_moment and https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#skipped_moment @ https://cdn.loom.com/assets/js/5520-5d1609b2c10e4f3e.js:485
+[    1712ms] [ERROR] Not signed in with the identity provider. @ https://www.loom.com/share/906625e4359f41b7a95c7f810421d251:0
+[    2046ms] [ERROR] Access to fetch at 'https://location.loom.com/' from origin 'https://www.loom.com' has been blocked by CORS policy: Request header field x-loom-request-source is not allowed by Access-Control-Allow-Headers in preflight response. @ https://www.loom.com/share/906625e4359f41b7a95c7f810421d251:0
+[    2047ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://location.loom.com/:0
+[    4580ms] [ERROR] [GSI_LOGGER]: FedCM get() rejects with AbortError: signal is aborted without reason @ https://cdn.loom.com/assets/js/5520-5d1609b2c10e4f3e.js:485

@@ -1,0 +1,9 @@
+[     496ms] [WARNING] {msg: An error has occurred checking the feature gate. Only the first occurrence of this error is logged., gateName: post-office_choreographer_window_singleton, error: Error: Client must be initialized before using this method
+    at eb.value (https://cdn.loom.com/as…} @ https://cdn.loom.com/assets/js/5520-65fe289e790c8498.js:33
+[     627ms] [WARNING] Multiple versions of FeatureGateClients found on the current page.
+      The currently bound version is 0.0.0-development when module version 4.26.5 was loading. @ https://cdn.loom.com/assets/js/5520-65fe289e790c8498.js:32
+[     691ms] [WARNING] [zustand devtools middleware] Please install/enable Redux devtools extension @ https://cdn.loom.com/assets/js/5520-65fe289e790c8498.js:485
+[     725ms] [ERROR] Failed to load resource: net::ERR_FAILED @ chrome-extension://invalid/:0
+[     970ms] [ERROR] Failed to load resource: net::ERR_FAILED @ chrome-extension://invalid/:0
+[    1507ms] [WARNING] Player w/ mediaElement has been deprecated and will be removed in v5.0 . We are currently at version v4.9 . Additional information: Please migrate from initializing Player with a mediaElement; use the attach method instead. @ https://cdn.loom.com/assets/js/5520-65fe289e790c8498.js:485
+[    1507ms] [WARNING] streaming.useNativeHlsOnSafari configuration has been deprecated and will be removed in v5.0 . We are currently at version v4.9 . Additional information: Please Use streaming.useNativeHlsForFairPlay or streaming.preferNativeHls instead. @ https://cdn.loom.com/assets/js/5520-65fe289e790c8498.js:485

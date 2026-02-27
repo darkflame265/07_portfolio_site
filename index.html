@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEV.FOLIO — Game Dev & AI Engineer</title>
+  <meta name="description" content="Unity · Unreal · AI를 다루는 게임 개발자의 프로젝트 포트폴리오">
+  <meta property="og:title" content="DEV.FOLIO — Game Dev & AI Engineer">
+  <meta property="og:description" content="Unity · Unreal · AI를 다루는 게임 개발자의 프로젝트 포트폴리오">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ───────────────────────────────────────────
+       CSS VARIABLES
+    ─────────────────────────────────────────── */
+    :root {
+      --bg:           #080810;
+      --surface:      #0e0e1c;
+      --surface-2:    #151525;
+      --border:       #222238;
+      --primary:      #7C3AED;
+      --primary-dim:  rgba(124,58,237,0.12);
+      --primary-glow: rgba(124,58,237,0.45);
+      --accent:       #06B6D4;
+      --accent-dim:   rgba(6,182,212,0.1);
+      --accent-glow:  rgba(6,182,212,0.4);
+      --text-1:       #EEEAFF;
+      --text-2:       #9896B8;
+      --text-3:       #50506E;
+      --shadow:       0 8px 40px rgba(0,0,0,0.5);
+      --font-display: 'Syne', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+      --font-body:    'Noto Sans KR', sans-serif;
+      --nav-h:        64px;
+      --max-w:        1260px;
+    }
+    [data-theme="light"] {
+      --bg:        #F4F2FF;
+      --surface:   #FFFFFF;
+      --surface-2: #EBE7FF;
+      --border:    #D5CFF5;
+      --text-1:    #1A1730;
+      --text-2:    #4B4872;
+      --text-3:    #8884A8;
+      --shadow:    0 8px 40px rgba(0,0,0,0.1);
+    }
+
+    /* ───────────────────────────────────────────
+       RESET & BASE
+    ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text-1);
+      line-height: 1.65;
+      overflow-x: hidden;
+      transition: background .3s, color .3s;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; }
+
+    /* ───────────────────────────────────────────
+       SCROLLBAR
+    ─────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+    /* ───────────────────────────────────────────
+       HEADER
+    ─────────────────────────────────────────── */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(20px, 5vw, 80px);
+      transition: background .3s, border-color .3s, backdrop-filter .3s;
+      border-bottom: 1px solid transparent;
+    }
+    .header.scrolled {
+      background: rgba(8, 8, 16, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom-color: var(--border);
+    }
+    [data-theme="light"] .header.scrolled {
+      background: rgba(244, 242, 255, 0.8);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -.03em;
+    }
+    .logo-mark {
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .logo-mark svg { width: 16px; height: 16px; }
+    .logo-text .accent { color: var(--primary); }
+
+    .theme-toggle {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+    }
+    .theme-toggle:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-dim);
+    }
+    .theme-toggle svg { width: 18px; height: 18px; transition: transform .4s; }
+    .theme-toggle:hover svg { transform: rotate(20deg); }
+
+    /* ───────────────────────────────────────────
+       HERO
+    ─────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: calc(var(--nav-h) + 48px) clamp(20px, 6vw, 80px) 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background layers */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px),
+        radial-gradient(circle at 50% 50%, rgba(8,8,16,0) 40%, var(--bg) 100%);
+      background-size: 50px 50px, 50px 50px, 100% 100%;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+
+    /* Glowing orbs */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      animation: orb-drift 16s ease-in-out infinite;
+    }
+    .hero-orb-1 {
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(124,58,237,0.28) 0%, transparent 65%);
+      top: -250px; left: -150px;
+      animation-delay: 0s;
+    }
+    .hero-orb-2 {
+      width: 550px; height: 550px;
+      background: radial-gradient(circle, rgba(6,182,212,0.22) 0%, transparent 65%);
+      bottom: -200px; right: -100px;
+      animation-delay: -8s;
+    }
+    .hero-orb-3 {
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(167,139,250,0.18) 0%, transparent 65%);
+      top: 55%; left: 65%;
+      animation-delay: -4s;
+    }
+    @keyframes orb-drift {
+      0%,100% { transform: translate(0,0); }
+      33%      { transform: translate(40px,-25px); }
+      66%      { transform: translate(-25px,35px); }
+    }
+
+    /* Content */
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 16px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--text-2);
+      margin-bottom: 32px;
+      animation: fadeUp .7s ease both;
+    }
+    .hero-badge .pulse-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      animation: pulse-dot 2.4s ease infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { box-shadow: 0 0 0 0 rgba(6,182,212,.5); }
+      50%      { box-shadow: 0 0 0 5px rgba(6,182,212,0); }
+    }
+
+    .hero-h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.4rem, 6.5vw, 5.2rem);
+      line-height: 1.08;
+      letter-spacing: -.035em;
+      margin-bottom: 20px;
+      animation: fadeUp .7s .1s ease both;
+    }
+    .hero-h1 .line-1 {
+      display: block;
+      color: var(--text-1);
+    }
+    .hero-h1 .line-2 {
+      display: block;
+      background: linear-gradient(135deg, var(--primary) 20%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: .82em;
+      background: var(--primary);
+      margin-left: 3px;
+      vertical-align: middle;
+      border-radius: 2px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%,100% { opacity:1 } 50% { opacity:0 } }
+
+    .hero-sub {
+      font-size: clamp(.9rem, 2vw, 1.05rem);
+      color: var(--text-2);
+      max-width: 420px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+      animation: fadeUp .7s .2s ease both;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp .7s .3s ease both;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 24px;
+      border-radius: 10px;
+      font-size: .9375rem;
+      font-weight: 600;
+      border: none;
+      transition: all .22s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #5B21B6 80%);
+      color: #fff;
+      box-shadow: 0 0 28px var(--primary-glow);
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(255,255,255,.12));
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 36px var(--primary-glow); }
+    .btn-primary:hover::before { opacity: 1; }
+
+    .btn-ghost {
+      background: var(--surface);
+      color: var(--text-2);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-dim);
+      transform: translateY(-2px);
+    }
+
+    /* Stats row */
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: clamp(24px, 5vw, 56px);
+      margin-top: 56px;
+      animation: fadeUp .7s .4s ease both;
+    }
+    .stat { text-align: center; }
+    .stat-n {
+      font-family: var(--font-mono);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 500;
+      color: var(--text-1);
+      display: block;
+      line-height: 1;
+    }
+    .stat-l {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--text-3);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      display: block;
+      margin-top: 6px;
+    }
+    .stat-divider {
+      width: 1px;
+      align-self: stretch;
+      background: var(--border);
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      color: var(--text-3);
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      z-index: 1;
+      animation: fadeUp .7s .5s ease both;
+    }
+    .scroll-hint svg { animation: bounce-y 2.2s ease-in-out infinite; }
+    @keyframes bounce-y { 0%,100% { transform:translateY(0) } 50% { transform:translateY(7px) } }
+
+    /* ───────────────────────────────────────────
+       SECTION COMMONS
+    ─────────────────────────────────────────── */
+    .section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: clamp(64px, 9vw, 120px) clamp(20px, 5vw, 80px);
+    }
+    .s-eye {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .s-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      letter-spacing: -.025em;
+      line-height: 1.2;
+    }
+    .s-head { margin-bottom: 44px; }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ───────────────────────────────────────────
+       CATEGORY TABS
+    ─────────────────────────────────────────── */
+    .tabs-row {
+      display: flex;
+      gap: 2px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+    .tab-btn {
+      font-size: .875rem;
+      font-weight: 500;
+      color: var(--text-3);
+      background: none;
+      border: none;
+      padding: 9px 20px 11px;
+      position: relative;
+      transition: color .2s;
+      white-space: nowrap;
+    }
+    .tab-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 2px 2px 0 0;
+      transform: scaleX(0);
+      transition: transform .25s ease;
+    }
+    .tab-btn.active { color: var(--text-1); font-weight: 600; }
+    .tab-btn.active::after { transform: scaleX(1); }
+    .tab-btn:hover { color: var(--text-2); }
+    .tab-count {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-3);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      margin-left: 5px;
+    }
+    .tab-btn.active .tab-count { color: var(--primary); border-color: var(--primary); }
+
+    /* ───────────────────────────────────────────
+       PROJECT GRID
+    ─────────────────────────────────────────── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 22px;
+    }
+    @media (max-width:1023px) { .project-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width:600px)  { .project-grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary);
+      box-shadow: 0 12px 40px var(--primary-glow), var(--shadow);
+    }
+
+    .card-thumb {
+      aspect-ratio: 16/9;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-thumb-inner {
+      width:100%; height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 2.8rem;
+      transition: transform .4s ease;
+      position: relative;
+    }
+    .card:hover .card-thumb-inner { transform: scale(1.05); }
+
+    /* Scanline overlay on hover */
+    .card-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 3px,
+        rgba(0,0,0,.08) 3px,
+        rgba(0,0,0,.08) 4px
+      );
+      opacity: 0;
+      transition: opacity .3s;
+      pointer-events: none;
+    }
+    .card:hover .card-thumb::after { opacity: 1; }
+
+    /* Shine sweep on hover */
+    .card-thumb::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
+      transition: left .5s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .card:hover .card-thumb::before { left: 140%; }
+
+    /* Category badge */
+    .cat-badge {
+      position: absolute;
+      top: 10px; right: 10px;
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-weight: 600;
+      z-index: 3;
+    }
+    .cat-unity  { background:rgba(67,56,202,.85); color:#C7D2FE; border:1px solid rgba(99,102,241,.4); }
+    .cat-unreal { background:rgba(4,78,52,.85);   color:#A7F3D0; border:1px solid rgba(16,185,129,.35); }
+    .cat-ai     { background:rgba(153,27,27,.85);  color:#FECACA; border:1px solid rgba(239,68,68,.35); }
+    .cat-web    { background:rgba(6,100,112,.85);  color:#A5F3FC; border:1px solid rgba(6,182,212,.35); }
+
+    /* Thumb gradient backgrounds */
+    .thumb-unity  { background: linear-gradient(145deg,#1e1b4b 0%,#312e81 60%,#1e1b4b 100%); }
+    .thumb-unreal { background: linear-gradient(145deg,#052e16 0%,#064e3b 60%,#052e16 100%); }
+    .thumb-ai     { background: linear-gradient(145deg,#450a0a 0%,#7f1d1d 60%,#450a0a 100%); }
+    .thumb-web    { background: linear-gradient(145deg,#042f3a 0%,#065666 60%,#042f3a 100%); }
+
+    /* Thumb inner grid accent */
+    .card-thumb-inner::before {
+      content:'';
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size:20px 20px;
+    }
+
+    /* Card body */
+    .card-body { padding: 16px 18px 14px; }
+    .card-title {
+      font-family: var(--font-display);
+      font-size: .975rem;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      line-height: 1.3;
+      margin-bottom: 7px;
+    }
+    .card-desc {
+      font-size: .82rem;
+      color: var(--text-2);
+      line-height: 1.65;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .card-date {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--text-3);
+    }
+
+    .card-footer {
+      display: flex;
+      gap: 7px;
+      padding: 11px 18px 15px;
+      border-top: 1px solid var(--border);
+    }
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .75rem;
+      color: var(--text-3);
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      border-radius: 7px;
+      padding: 4px 10px;
+      transition: all .2s;
+    }
+    .card-link svg { width: 12px; height: 12px; }
+    .card-link:hover {
+      color: var(--text-1);
+      border-color: var(--primary);
+      background: var(--primary-dim);
+    }
+
+    /* Hidden cards */
+    .card.hidden { display: none; }
+
+    /* ───────────────────────────────────────────
+       SKILLS SECTION
+    ─────────────────────────────────────────── */
+    .skills-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px 72px;
+    }
+    @media (max-width:639px) { .skills-grid { grid-template-columns:1fr; } }
+
+    .skill-row { display: flex; flex-direction: column; gap: 9px; }
+    .skill-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .skill-name {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text-1);
+    }
+    .skill-pct {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--text-3);
+    }
+
+    /* RPG-style segmented bar */
+    .skill-bar {
+      height: 11px;
+      background: var(--surface-2);
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .skill-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 3px;
+      transition: width 1.4s cubic-bezier(.22,1,.36,1);
+      position: relative;
+    }
+    /* Segment dividers */
+    .skill-fill::after {
+      content:'';
+      position:absolute; inset:0;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent calc(10% - 1.5px),
+        rgba(0,0,0,.25) calc(10% - 1.5px),
+        rgba(0,0,0,.25) 10%
+      );
+    }
+    /* Tip glow */
+    .skill-fill::before {
+      content:'';
+      position:absolute;
+      right:0; top:0; bottom:0;
+      width:24px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.25));
+    }
+
+    /* ───────────────────────────────────────────
+       FOOTER
+    ─────────────────────────────────────────── */
+    .footer-wrap {
+      border-top: 1px solid var(--border);
+    }
+    .footer {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 32px clamp(20px, 5vw, 80px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--text-3);
+    }
+    .footer-copy span { color: var(--primary); }
+    .footer-links { display: flex; gap: 10px; }
+    .footer-icon {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-3);
+      transition: all .2s;
+    }
+    .footer-icon svg { width: 16px; height: 16px; }
+    .footer-icon:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-dim);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─────────────── HEADER ─────────────── -->
+  <header class="header" id="header">
+    <a class="logo" href="#">
+      <div class="logo-mark">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 4L8 2L13 4V8C13 11 8 14 8 14C8 14 3 11 3 8V4Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="8" cy="8" r="2" fill="white"/>
+        </svg>
+      </div>
+      <span class="logo-text">DEV<span class="accent">.</span>FOLIO</span>
+    </a>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="테마 전환">
+      <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+      <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- ─────────────── HERO ─────────────── -->
+  <section class="hero" id="home">
+    <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-3" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        Game Developer &amp; AI Engineer
+      </div>
+
+      <h1 class="hero-h1">
+        <span class="line-1" id="typewriter-line">안녕하세요.<span class="cursor" id="cursor"></span></span>
+        <span class="line-2">Game Dev &amp; AI</span>
+      </h1>
+
+      <p class="hero-sub">
+        Unity · Unreal · AI를 다루는 개발자의<br>
+        프로젝트 포트폴리오입니다.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          프로젝트 보기
+        </a>
+        <a href="https://github.com/darkflame265" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-n" id="stat-total">0</span>
+          <span class="stat-l">Projects</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <span class="stat-n">2</span>
+          <span class="stat-l">Unity</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <span class="stat-n">1</span>
+          <span class="stat-l">Unreal</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <span class="stat-n">4</span>
+          <span class="stat-l">AI</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <span class="stat-n">1</span>
+          <span class="stat-l">Web</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <span>SCROLL</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m7 10 5 5 5-5"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ─────────────── PROJECTS ─────────────── -->
+  <section class="section" id="projects">
+    <div class="s-head reveal">
+      <p class="s-eye">// portfolio gallery</p>
+      <h2 class="s-title">프로젝트 갤러리</h2>
+    </div>
+
+    <div class="tabs-row reveal" id="tabsRow">
+      <button class="tab-btn active" data-cat="all">전체 <span class="tab-count" id="count-all">8</span></button>
+      <button class="tab-btn" data-cat="unity">Unity <span class="tab-count" id="count-unity">2</span></button>
+      <button class="tab-btn" data-cat="unreal">Unreal <span class="tab-count" id="count-unreal">1</span></button>
+      <button class="tab-btn" data-cat="ai">AI <span class="tab-count" id="count-ai">4</span></button>
+      <button class="tab-btn" data-cat="web">Web <span class="tab-count" id="count-web">1</span></button>
+    </div>
+
+    <div class="project-grid" id="projectGrid"></div>
+  </section>
+
+  <!-- ─────────────── SKILLS ─────────────── -->
+  <section class="section skills-section" id="skills">
+    <div class="s-head reveal">
+      <p class="s-eye">// tech stack</p>
+      <h2 class="s-title">기술 스택</h2>
+    </div>
+
+    <div class="skills-grid" id="skillsGrid"></div>
+  </section>
+
+  <!-- ─────────────── FOOTER ─────────────── -->
+  <div class="footer-wrap">
+    <footer class="footer">
+      <p class="footer-copy">© 2026 <span>DEV.FOLIO</span> — Game Dev &amp; AI Engineer</p>
+      <div class="footer-links">
+        <a href="https://github.com/darkflame265" target="_blank" rel="noopener" class="footer-icon" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+        <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-icon" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-2.47 12.35 12.35 0 0 0-7.64 0A4.83 4.83 0 0 1 4.41 6.69C3.1 7.62 2 9.6 2 12s1.1 4.38 2.41 5.31a4.83 4.83 0 0 1 3.77 2.47 12.35 12.35 0 0 0 7.64 0 4.83 4.83 0 0 1 3.77-2.47C20.9 16.38 22 14.4 22 12s-1.1-4.38-2.41-5.31zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+        </a>
+      </div>
+    </footer>
+  </div>
+
+
+  <script>
+    /* ───────────────────────────────────
+       PROJECT DATA
+    ─────────────────────────────────── */
+    const PROJECTS = [
+      {
+        id: 'heukgildong',
+        title: '흑길동 : 대유쾌 마운틴',
+        desc: '흑길동 캐릭터가 높은 곳을 향해 올라가는 "Only UP" 방식의 플랫포머 게임입니다.',
+        category: 'unity',
+        date: '2025.11.11',
+        emoji: '🏔️',
+        links: {
+          github: 'https://github.com/darkflame265/PlayGround_good',
+          video: 'https://vimeo.com/1157451424',
+          download: 'https://drive.google.com/file/d/1BDh63ggmo_Zhu1bhHyxM4UVa7_0XmLQQ/view?usp=sharing'
+        }
+      },
+      {
+        id: 'wbc-survivor',
+        title: 'WBC Survivor',
+        desc: '백혈구 캐릭터가 몰려오는 바이러스들을 물리치고 진화하며 생존하는 뱀파이어 서바이벌 방식의 게임입니다.',
+        category: 'unity',
+        date: '2025.10.03',
+        emoji: '🦠',
+        links: {
+          github: 'https://github.com/darkflame265/NinjaSurvivor',
+          download: 'https://drive.google.com/file/d/1wzjpUDzk_ZiYcfxQZT4NCwRThKdOy2rW/view'
+        }
+      },
+      {
+        id: 'cs-classroom',
+        title: '컴퓨터 공학과 교실',
+        desc: '블렌더를 이용하여 실제 강의실을 Unreal Engine으로 재현한 환경 아트 프로젝트입니다.',
+        category: 'unreal',
+        date: '2025.06.18',
+        emoji: '🏫',
+        links: {
+          github: 'https://github.com/darkflame265/blenderCNSU',
+          video: 'https://www.loom.com/share/906625e4359f41b7a95c7f810421d251'
+        }
+      },
+      {
+        id: 'world-hardest-game',
+        title: 'python_theWorldHardestGame',
+        desc: '세상에서 제일 어려운 게임을 Python으로 재현한 클론 게임 프로젝트입니다.',
+        category: 'ai',
+        date: '2024.11.27',
+        emoji: '🔴',
+        links: {
+          github: 'https://github.com/darkflame265/python_theWorldHardestGame'
+        }
+      },
+      {
+        id: 'touhou-ai',
+        title: '01_Touhou_AI',
+        desc: '동방홍마향을 자동 플레이하는 AI입니다. CSRT 플레이어 트래킹과 PPO 강화학습 정책을 사용합니다.',
+        category: 'ai',
+        date: '2026.01.05',
+        emoji: '🎯',
+        links: {
+          github: 'https://github.com/darkflame265/01_touhou_ai'
+        }
+      },
+      {
+        id: 'shooter-game-ai',
+        title: '04_shooter_game_AI',
+        desc: 'PPO 강화학습 기반 슈터 게임 AI입니다. 벡터 기반 MLP 학습으로 준수한 회피 및 사격 성능을 보입니다.',
+        category: 'ai',
+        date: '2026.01.21',
+        emoji: '🤖',
+        links: {
+          github: 'https://github.com/darkflame265/04_shooter_game_ai/tree/main',
+          video: 'https://vimeo.com/1157447669'
+        }
+      },
+      {
+        id: 'avoid-game-ai',
+        title: '05_avoid_game_AI',
+        desc: 'PPO 정책 강화학습 기반 회피 게임 AI 연습 시뮬레이터입니다. 이미지가 아닌 벡터 기반 MLP로 효율적인 학습이 가능합니다.',
+        category: 'ai',
+        date: '2026.01.22',
+        emoji: '⚡',
+        links: {
+          github: 'https://github.com/darkflame265/05_avoid_game_ai/tree/main',
+          video: 'https://vimeo.com/1157447451'
+        }
+      },
+      {
+        id: 'path-clash',
+        title: 'Path Clash',
+        desc: '두 플레이어가 1:1로 경로를 작성하며, 상대를 맞추거나 피하는 TBS Game(턴제 전략 게임) 입니다.',
+        category: 'web',
+        date: '2026.02.27',
+        emoji: '⚔️',
+        links: {
+          github: 'https://github.com/darkflame265/06_TBSwebGame',
+          site: 'https://06-tb-sweb-game.vercel.app/'
+        }
+      }
+    ];
+
+    /* ───────────────────────────────────
+       SKILLS DATA
+    ─────────────────────────────────── */
+    const SKILLS = [
+      { name: 'Unity',   pct: 80, icon: '🎮' },
+      { name: 'C#',      pct: 80, icon: '💎' },
+      { name: 'Unreal',  pct: 60, icon: '⚙️' },
+      { name: 'Python',  pct: 85, icon: '🐍' },
+      { name: 'PyTorch', pct: 70, icon: '🔥' },
+      { name: 'Blender', pct: 55, icon: '🧊' },
+    ];
+
+    /* ───────────────────────────────────
+       SVG ICONS
+    ─────────────────────────────────── */
+    const ICONS = {
+      github: `<svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>`,
+      video: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
+      download: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
+      site: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+    };
+
+    /* ───────────────────────────────────
+       RENDER PROJECTS
+    ─────────────────────────────────── */
+    function createCard(p) {
+      const catLabel = { unity: 'Unity', unreal: 'Unreal', ai: 'AI', web: 'Web' }[p.category];
+
+      const linkButtons = [];
+      if (p.links.github)   linkButtons.push(`<a href="${p.links.github}" target="_blank" rel="noopener" class="card-link" aria-label="GitHub">${ICONS.github} GitHub</a>`);
+      if (p.links.video)    linkButtons.push(`<a href="${p.links.video}" target="_blank" rel="noopener" class="card-link" aria-label="영상">${ICONS.video} 영상</a>`);
+      if (p.links.download) linkButtons.push(`<a href="${p.links.download}" target="_blank" rel="noopener" class="card-link" aria-label="다운로드">${ICONS.download} .exe</a>`);
+      if (p.links.site)     linkButtons.push(`<a href="${p.links.site}" target="_blank" rel="noopener" class="card-link" aria-label="사이트">${ICONS.site} 사이트</a>`);
+
+      return `
+        <article class="card reveal" data-cat="${p.category}">
+          <div class="card-thumb">
+            <div class="card-thumb-inner thumb-${p.category}" aria-hidden="true">
+              <span style="position:relative;z-index:1">${p.emoji}</span>
+            </div>
+            <span class="cat-badge cat-${p.category}">${catLabel}</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">${p.title}</h3>
+            <p class="card-desc">${p.desc}</p>
+            <time class="card-date">${p.date}</time>
+          </div>
+          <div class="card-footer">${linkButtons.join('')}</div>
+        </article>`;
+    }
+
+    function renderProjects(cat) {
+      const grid = document.getElementById('projectGrid');
+      const filtered = cat === 'all' ? PROJECTS : PROJECTS.filter(p => p.category === cat);
+      grid.innerHTML = filtered.map(createCard).join('');
+
+      // Re-run reveal observer on new cards
+      grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    }
+
+    /* ───────────────────────────────────
+       RENDER SKILLS
+    ─────────────────────────────────── */
+    function renderSkills() {
+      const grid = document.getElementById('skillsGrid');
+      grid.innerHTML = SKILLS.map(s => `
+        <div class="skill-row reveal">
+          <div class="skill-meta">
+            <span class="skill-name">${s.icon} ${s.name}</span>
+            <span class="skill-pct">${s.pct}%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-pct="${s.pct}"></div>
+          </div>
+        </div>`).join('');
+      grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    }
+
+    /* ───────────────────────────────────
+       TABS
+    ─────────────────────────────────── */
+    document.getElementById('tabsRow').addEventListener('click', e => {
+      const btn = e.target.closest('.tab-btn');
+      if (!btn) return;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderProjects(btn.dataset.cat);
+    });
+
+    /* ───────────────────────────────────
+       THEME TOGGLE
+    ─────────────────────────────────── */
+    const html = document.documentElement;
+    const sunIcon = document.getElementById('icon-sun');
+    const moonIcon = document.getElementById('icon-moon');
+
+    function updateThemeIcons() {
+      const isDark = html.dataset.theme !== 'light';
+      sunIcon.style.display  = isDark ? 'none' : 'block';
+      moonIcon.style.display = isDark ? 'block' : 'none';
+    }
+    updateThemeIcons();
+
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      html.dataset.theme = html.dataset.theme === 'light' ? 'dark' : 'light';
+      updateThemeIcons();
+    });
+
+    /* ───────────────────────────────────
+       HEADER SCROLL
+    ─────────────────────────────────── */
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    /* ───────────────────────────────────
+       INTERSECTION OBSERVER (reveal + skills)
+    ─────────────────────────────────── */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+
+        // Animate skill bars
+        const fill = entry.target.querySelector('.skill-fill');
+        if (fill) {
+          setTimeout(() => {
+            fill.style.width = fill.dataset.pct + '%';
+          }, 100);
+        }
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.15 });
+
+    // Observe static reveals
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ───────────────────────────────────
+       COUNTER ANIMATION (hero stats)
+    ─────────────────────────────────── */
+    function animateCount(el, target, duration) {
+      let start = 0;
+      const step = target / (duration / 16);
+      const timer = setInterval(() => {
+        start = Math.min(start + step, target);
+        el.textContent = Math.round(start);
+        if (start >= target) clearInterval(timer);
+      }, 16);
+    }
+    setTimeout(() => animateCount(document.getElementById('stat-total'), 8, 800), 600);
+
+    /* ───────────────────────────────────
+       TYPEWRITER EFFECT
+    ─────────────────────────────────── */
+    function typewriter(el, text, speed, callback) {
+      let i = 0;
+      const cursor = document.getElementById('cursor');
+      function type() {
+        if (i < text.length) {
+          el.textContent = text.slice(0, ++i);
+          el.appendChild(cursor);
+          setTimeout(type, speed + Math.random() * 40);
+        } else {
+          setTimeout(() => {
+            cursor.style.display = 'none';
+            if (callback) callback();
+          }, 800);
+        }
+      }
+      type();
+    }
+
+    window.addEventListener('load', () => {
+      const line = document.getElementById('typewriter-line');
+      typewriter(line, '안녕하세요,', 90);
+    });
+
+    /* ───────────────────────────────────
+       INIT
+    ─────────────────────────────────── */
+    renderProjects('all');
+    renderSkills();
+  </script>
+</body>
+</html>
