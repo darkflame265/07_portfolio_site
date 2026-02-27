@@ -15,8 +15,8 @@ Unity · Unreal · AI · Web 프로젝트를 소개하는 개인 포트폴리오
 
 ## 📸 Preview
 
-| Hero | Projects |
-|------|----------|
+| Hero              | Projects                          |
+| ----------------- | --------------------------------- |
 | ![Hero](hero.png) | ![Projects](projects-section.png) |
 
 ---
@@ -36,12 +36,12 @@ Unity · Unreal · AI · Web 프로젝트를 소개하는 개인 포트폴리오
 
 ## 🛠 Tech Stack
 
-| 항목 | 내용 |
-|------|------|
-| 구조 | Vanilla HTML / CSS / JavaScript |
-| 폰트 | [Syne](https://fonts.google.com/specimen/Syne) · [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) · [Noto Sans KR](https://fonts.google.com/noto/specimen/Noto+Sans+KR) |
-| 애니메이션 | CSS Keyframes · IntersectionObserver API |
-| 배포 | GitHub Pages |
+| 항목       | 내용                                                                                                                                                                                      |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 구조       | Vanilla HTML / CSS / JavaScript                                                                                                                                                           |
+| 폰트       | [Syne](https://fonts.google.com/specimen/Syne) · [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) · [Noto Sans KR](https://fonts.google.com/noto/specimen/Noto+Sans+KR) |
+| 애니메이션 | CSS Keyframes · IntersectionObserver API                                                                                                                                                  |
+| 배포       | GitHub Pages                                                                                                                                                                              |
 
 별도 프레임워크나 빌드 도구 없이 **단일 `index.html` 파일**로 동작합니다.
 
@@ -75,9 +75,17 @@ python -m http.server 3000
 
 ## 🗂 Project Gallery
 
-| 카테고리 | 프로젝트 |
-|----------|----------|
-| **Unity** | 흑길동 : 대유쾌 마운틴, WBC Survivor |
-| **Unreal** | 컴퓨터 공학과 교실 |
-| **AI** | python_theWorldHardestGame, 01_Touhou_AI, 04_shooter_game_AI, 05_avoid_game_AI |
-| **Web** | Path Clash |
+| 카테고리   | 프로젝트                                                                       |
+| ---------- | ------------------------------------------------------------------------------ |
+| **Unity**  | 흑길동 : 대유쾌 마운틴, WBC Survivor                                           |
+| **Unreal** | 컴퓨터 공학과 교실                                                             |
+| **AI**     | python_theWorldHardestGame, 01_Touhou_AI, 04_shooter_game_AI, 05_avoid_game_AI |
+| **Web**    | Path Clash                                                                     |
+
+# <<<<<<< HEAD
+
+---
+
+예전 Figma 포트폴리오 주소 : https://yield-jargon-25805462.figma.site/
+
+> > > > > > > 840befc313f5a789603ae7c13f2654bb5ac2966b
