@@ -782,13 +782,28 @@
 
       /* Thumb gradient backgrounds (fallback when no image) */
       .thumb-unity {
-        background: linear-gradient(145deg, #1e1b4b 0%, #312e81 60%, #1e1b4b 100%);
+        background: linear-gradient(
+          145deg,
+          #1e1b4b 0%,
+          #312e81 60%,
+          #1e1b4b 100%
+        );
       }
       .thumb-ai {
-        background: linear-gradient(145deg, #450a0a 0%, #7f1d1d 60%, #450a0a 100%);
+        background: linear-gradient(
+          145deg,
+          #450a0a 0%,
+          #7f1d1d 60%,
+          #450a0a 100%
+        );
       }
       .thumb-web {
-        background: linear-gradient(145deg, #042f3a 0%, #065666 60%, #042f3a 100%);
+        background: linear-gradient(
+          145deg,
+          #042f3a 0%,
+          #065666 60%,
+          #042f3a 100%
+        );
       }
 
       /* Thumb inner: image support */
@@ -1327,7 +1342,7 @@
         },
         {
           id: "path-clash",
-          title: "Path Clash",
+          title: "08_Path Clash",
           desc: "두 플레이어가 1:1로 경로를 작성하며, 상대를 맞추거나 피하는 TBS Game(턴제 전략 게임) 입니다.",
           category: "web",
           date: "2026.03.01",
@@ -1390,7 +1405,9 @@
             `<a href="${p.links.site}" target="_blank" rel="noopener" class="card-link" aria-label="사이트">${ICONS.site} 사이트</a>`,
           );
 
-        const thumbStyle = p.thumbnail ? `background-image:url('${p.thumbnail}')` : "";
+        const thumbStyle = p.thumbnail
+          ? `background-image:url('${p.thumbnail}')`
+          : "";
         return `
         <article class="card reveal" data-cat="${p.category}">
           <div class="card-thumb">
