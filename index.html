@@ -701,7 +701,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 2.8rem;
         transition: transform 0.4s ease;
         position: relative;
       }
@@ -781,41 +780,35 @@
         border: 1px solid rgba(6, 182, 212, 0.35);
       }
 
-      /* Thumb gradient backgrounds */
+      /* Thumb gradient backgrounds (fallback when no image) */
       .thumb-unity {
-        background: linear-gradient(
-          145deg,
-          #1e1b4b 0%,
-          #312e81 60%,
-          #1e1b4b 100%
-        );
+        background: linear-gradient(145deg, #1e1b4b 0%, #312e81 60%, #1e1b4b 100%);
       }
       .thumb-ai {
-        background: linear-gradient(
-          145deg,
-          #450a0a 0%,
-          #7f1d1d 60%,
-          #450a0a 100%
-        );
+        background: linear-gradient(145deg, #450a0a 0%, #7f1d1d 60%, #450a0a 100%);
       }
       .thumb-web {
-        background: linear-gradient(
-          145deg,
-          #042f3a 0%,
-          #065666 60%,
-          #042f3a 100%
-        );
+        background: linear-gradient(145deg, #042f3a 0%, #065666 60%, #042f3a 100%);
       }
 
-      /* Thumb inner grid accent */
+      /* Thumb inner: image support */
+      .card-thumb-inner {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      /* Dark vignette overlay on image */
       .card-thumb-inner::before {
         content: "";
         position: absolute;
         inset: 0;
-        background-image:
-          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-        background-size: 20px 20px;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.1) 0%,
+          rgba(0, 0, 0, 0.3) 100%
+        );
+        pointer-events: none;
       }
 
       /* Card body */
@@ -1249,7 +1242,7 @@
           desc: '흑길동 캐릭터가 높은 곳을 향해 올라가는 "Only UP" 방식의 플랫포머 게임입니다.',
           category: "unity",
           date: "2025.11.11",
-          emoji: "🏔️",
+          thumbnail: "site_Thumbnail/흑길동.png",
           links: {
             github: "https://github.com/darkflame265/PlayGround_good",
             video: "https://vimeo.com/1157451424",
@@ -1263,7 +1256,7 @@
           desc: "백혈구 캐릭터가 몰려오는 바이러스들을 물리치고 진화하며 생존하는 뱀파이어 서바이벌 방식의 게임입니다.",
           category: "unity",
           date: "2025.10.03",
-          emoji: "🦠",
+          thumbnail: "site_Thumbnail/wbc_survivor.png",
           links: {
             github: "https://github.com/darkflame265/NinjaSurvivor",
             download:
@@ -1276,7 +1269,7 @@
           desc: "블렌더를 이용하여 실제 강의실을 Unreal Engine으로 재현한 환경 아트 프로젝트입니다.",
           category: "unity",
           date: "2025.06.18",
-          emoji: "🏫",
+          thumbnail: "site_Thumbnail/컴퓨터공학과교실.png",
           links: {
             github: "https://github.com/darkflame265/blenderCNSU",
             video:
@@ -1289,7 +1282,7 @@
           desc: "세상에서 제일 어려운 게임을 Python으로 재현한 클론 게임 프로젝트입니다.",
           category: "ai",
           date: "2024.11.27",
-          emoji: "🔴",
+          thumbnail: "site_Thumbnail/theworldhardestgame.png",
           links: {
             github:
               "https://github.com/darkflame265/python_theWorldHardestGame",
@@ -1301,7 +1294,7 @@
           desc: "동방홍마향을 자동 플레이하는 AI입니다. CSRT 플레이어 트래킹과 PPO 강화학습 정책을 사용합니다.",
           category: "ai",
           date: "2026.01.05",
-          emoji: "🎯",
+          thumbnail: "site_Thumbnail/01_touhou_ai.png",
           links: {
             github: "https://github.com/darkflame265/01_touhou_ai",
           },
@@ -1312,7 +1305,7 @@
           desc: "PPO 강화학습 기반 슈터 게임 AI입니다. 벡터 기반 MLP 학습으로 준수한 회피 및 사격 성능을 보입니다.",
           category: "ai",
           date: "2026.01.21",
-          emoji: "🤖",
+          thumbnail: "site_Thumbnail/04_shooter_game_ai.png",
           links: {
             github:
               "https://github.com/darkflame265/04_shooter_game_ai/tree/main",
@@ -1325,7 +1318,7 @@
           desc: "PPO 정책 강화학습 기반 회피 게임 AI 연습 시뮬레이터입니다. 이미지가 아닌 벡터 기반 MLP로 효율적인 학습이 가능합니다.",
           category: "ai",
           date: "2026.01.22",
-          emoji: "⚡",
+          thumbnail: "site_Thumbnail/05_avoid_game_ai.png",
           links: {
             github:
               "https://github.com/darkflame265/05_avoid_game_ai/tree/main",
@@ -1338,7 +1331,7 @@
           desc: "두 플레이어가 1:1로 경로를 작성하며, 상대를 맞추거나 피하는 TBS Game(턴제 전략 게임) 입니다.",
           category: "web",
           date: "2026.03.01",
-          emoji: "⚔️",
+          thumbnail: "site_Thumbnail/08_PathClash.png",
           links: {
             github: "https://github.com/darkflame265/08_PathClash",
             site: "https://zero8-pathclash-1.onrender.com/",
@@ -1397,12 +1390,11 @@
             `<a href="${p.links.site}" target="_blank" rel="noopener" class="card-link" aria-label="사이트">${ICONS.site} 사이트</a>`,
           );
 
+        const thumbStyle = p.thumbnail ? `background-image:url('${p.thumbnail}')` : "";
         return `
         <article class="card reveal" data-cat="${p.category}">
           <div class="card-thumb">
-            <div class="card-thumb-inner thumb-${p.category}" aria-hidden="true">
-              <span style="position:relative;z-index:1">${p.emoji}</span>
-            </div>
+            <div class="card-thumb-inner thumb-${p.category}" style="${thumbStyle}" aria-hidden="true"></div>
             <span class="cat-badge cat-${p.category}">${catLabel}</span>
           </div>
           <div class="card-body">
