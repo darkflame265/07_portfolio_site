@@ -770,11 +770,6 @@
         color: #c7d2fe;
         border: 1px solid rgba(99, 102, 241, 0.4);
       }
-      .cat-unreal {
-        background: rgba(4, 78, 52, 0.85);
-        color: #a7f3d0;
-        border: 1px solid rgba(16, 185, 129, 0.35);
-      }
       .cat-ai {
         background: rgba(153, 27, 27, 0.85);
         color: #fecaca;
@@ -793,14 +788,6 @@
           #1e1b4b 0%,
           #312e81 60%,
           #1e1b4b 100%
-        );
-      }
-      .thumb-unreal {
-        background: linear-gradient(
-          145deg,
-          #052e16 0%,
-          #064e3b 60%,
-          #052e16 100%
         );
       }
       .thumb-ai {
@@ -1146,13 +1133,8 @@
           </div>
           <div class="stat-divider" aria-hidden="true"></div>
           <div class="stat">
-            <span class="stat-n">2</span>
+            <span class="stat-n">3</span>
             <span class="stat-l">Unity</span>
-          </div>
-          <div class="stat-divider" aria-hidden="true"></div>
-          <div class="stat">
-            <span class="stat-n">1</span>
-            <span class="stat-l">Unreal</span>
           </div>
           <div class="stat-divider" aria-hidden="true"></div>
           <div class="stat">
@@ -1196,10 +1178,7 @@
           전체 <span class="tab-count" id="count-all">8</span>
         </button>
         <button class="tab-btn" data-cat="unity">
-          Unity <span class="tab-count" id="count-unity">2</span>
-        </button>
-        <button class="tab-btn" data-cat="unreal">
-          Unreal <span class="tab-count" id="count-unreal">1</span>
+          Unity <span class="tab-count" id="count-unity">3</span>
         </button>
         <button class="tab-btn" data-cat="ai">
           AI <span class="tab-count" id="count-ai">4</span>
@@ -1295,7 +1274,7 @@
           id: "cs-classroom",
           title: "컴퓨터 공학과 교실",
           desc: "블렌더를 이용하여 실제 강의실을 Unreal Engine으로 재현한 환경 아트 프로젝트입니다.",
-          category: "unreal",
+          category: "unity",
           date: "2025.06.18",
           emoji: "🏫",
           links: {
@@ -1396,7 +1375,6 @@
       function createCard(p) {
         const catLabel = {
           unity: "Unity",
-          unreal: "Unreal",
           ai: "AI",
           web: "Web",
         }[p.category];
