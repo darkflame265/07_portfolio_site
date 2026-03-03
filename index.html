@@ -466,6 +466,30 @@
         background: var(--primary-dim);
         transform: translateY(-2px);
       }
+      .btn-accent {
+        background: linear-gradient(135deg, var(--accent), #0891b2 80%);
+        color: #fff;
+        box-shadow: 0 0 28px var(--accent-glow);
+      }
+      .btn-accent::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          transparent,
+          rgba(255, 255, 255, 0.12)
+        );
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .btn-accent:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 36px var(--accent-glow);
+      }
+      .btn-accent:hover::before {
+        opacity: 1;
+      }
 
       /* Stats row */
       .hero-stats {
@@ -1131,6 +1155,14 @@
               />
             </svg>
             GitHub
+          </a>
+          <a href="portfolio.html" class="btn btn-accent">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+              <path d="M12 17h.01"/>
+            </svg>
+            문제 해결
           </a>
         </div>
 
