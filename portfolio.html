@@ -1,0 +1,1160 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>김기희 개발자 포트폴리오</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #f8f4ee;
+        --surface: #f1eae0;
+        --card: #ede5d8;
+        --card2: #f5f0e8;
+        --border: #d8cebc;
+        --border2: #c8baa4;
+        --text: #1e1912;
+        --text2: #524840;
+        --muted: #8c7c6c;
+        --amber: #b85e0c;
+        --amber-l: #d07020;
+        --amber-bg: rgba(184, 94, 12, 0.07);
+        --blue: #1a58a6;
+        --blue-bg: rgba(26, 88, 166, 0.06);
+        --green: #1e6838;
+        --green-bg: rgba(30, 104, 56, 0.06);
+        --red: #a62828;
+        --red-bg: rgba(166, 40, 40, 0.06);
+        --teal: #16606a;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Noto Sans KR", sans-serif;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      /* ════════════════════════ COVER ════════════════════════ */
+      .cover {
+        width: 210mm;
+        height: 297mm;
+        background: var(--bg);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 18mm 20mm 0;
+        page-break-after: always;
+        overflow: hidden;
+      }
+
+      /* decorative corner accent */
+      .cover::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 2mm;
+        height: 60mm;
+        background: linear-gradient(
+          180deg,
+          var(--amber) 0%,
+          var(--amber-l) 60%,
+          transparent 100%
+        );
+      }
+      .cover::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 60mm;
+        height: 2mm;
+        background: linear-gradient(
+          90deg,
+          var(--amber) 0%,
+          var(--amber-l) 60%,
+          transparent 100%
+        );
+      }
+
+      .cover-top-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 8pt;
+        letter-spacing: 4px;
+        color: var(--amber);
+        text-transform: uppercase;
+        margin-bottom: 12mm;
+        padding-left: 4mm;
+      }
+
+      .cover-main {
+        display: flex;
+        gap: 10mm;
+        align-items: flex-end;
+        margin-bottom: 10mm;
+      }
+      .cover-name-block {
+        flex: 1;
+      }
+      .cover-name-en {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 76pt;
+        font-weight: 700;
+        line-height: 0.88;
+        color: var(--text);
+        letter-spacing: -3px;
+        padding-left: 4mm;
+      }
+      .cover-name-kr {
+        font-family: "Noto Sans KR", sans-serif;
+        font-size: 18pt;
+        font-weight: 300;
+        color: var(--muted);
+        letter-spacing: 10px;
+        margin-top: 4mm;
+        padding-left: 5mm;
+      }
+
+      .cover-projects-aside {
+        text-align: right;
+        padding-bottom: 4mm;
+        flex-shrink: 0;
+      }
+      .cover-aside-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 6.5pt;
+        letter-spacing: 3px;
+        color: var(--muted);
+        text-transform: uppercase;
+        margin-bottom: 3mm;
+      }
+      .cover-aside-item {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 16pt;
+        font-style: italic;
+        color: var(--amber-l);
+        line-height: 1.65;
+      }
+
+      .cover-rule {
+        height: 0.5mm;
+        background: linear-gradient(
+          90deg,
+          var(--amber) 0%,
+          var(--amber-l) 30%,
+          var(--border) 80%,
+          transparent 100%
+        );
+        margin: 0 0 8mm 4mm;
+      }
+
+      .cover-body {
+        display: flex;
+        gap: 14mm;
+        flex: 1;
+        padding-left: 4mm;
+      }
+      .cover-tagline-block {
+        flex: 1.2;
+      }
+      .cover-tagline {
+        font-size: 12pt;
+        font-weight: 300;
+        color: var(--text2);
+        line-height: 1.9;
+        margin-bottom: 10mm;
+      }
+      .cover-contacts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5mm 10mm;
+      }
+      .contact-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 7pt;
+        letter-spacing: 2.5px;
+        color: var(--amber);
+        text-transform: uppercase;
+        margin-bottom: 1mm;
+      }
+      .contact-value {
+        font-size: 10pt;
+        color: var(--text);
+      }
+      .contact-value a {
+        color: var(--blue);
+        text-decoration: underline;
+        text-decoration-thickness: 0.25mm;
+        text-underline-offset: 0.45mm;
+        font-weight: 500;
+      }
+      .contact-value a:hover {
+        color: var(--amber);
+      }
+
+      .cover-stack-numbers {
+        flex: 0.6;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-bottom: 6mm;
+        gap: 4mm;
+      }
+      .stack-num {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 72pt;
+        font-weight: 700;
+        line-height: 0.85;
+        color: rgba(184, 94, 12, 0.08);
+        text-align: right;
+        letter-spacing: -4px;
+      }
+
+      .cover-footer {
+        margin: 0 -20mm;
+        padding: 5mm 20mm;
+        background: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 8mm;
+        margin-top: auto;
+      }
+      .cover-footer-item {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 7.5pt;
+        letter-spacing: 1.5px;
+        color: rgba(248, 244, 238, 0.6);
+        text-transform: uppercase;
+      }
+      .cover-footer-dot {
+        width: 1.5mm;
+        height: 1.5mm;
+        border-radius: 50%;
+        background: var(--amber);
+        flex-shrink: 0;
+      }
+
+      /* ════════════════════════ PROJECT PAGES ════════════════════════ */
+      .proj-page {
+        width: 210mm;
+        height: 297mm;
+        background: var(--bg);
+        padding: 5mm 18mm 15mm 18mm;
+        page-break-before: always;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .proj-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 8pt;
+        letter-spacing: 3px;
+        color: var(--amber);
+        text-transform: uppercase;
+        margin-bottom: 2mm;
+      }
+      .proj-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 30pt;
+        font-weight: 700;
+        color: var(--text);
+        line-height: 0.95;
+        margin-bottom: 3mm;
+        letter-spacing: -0.5px;
+      }
+      .proj-desc {
+        font-size: 10.5pt;
+        font-weight: 300;
+        color: var(--text2);
+        line-height: 1.8;
+        max-width: 148mm;
+        margin-bottom: 1mm;
+      }
+      .proj-desc a {
+        color: var(--blue);
+        text-decoration: underline;
+        text-decoration-thickness: 0.25mm;
+        text-underline-offset: 0.45mm;
+        font-weight: 500;
+      }
+      .proj-rule {
+        height: 0.4mm;
+        background: linear-gradient(
+          90deg,
+          var(--amber) 0%,
+          var(--amber-l) 25%,
+          var(--border) 70%,
+          transparent 100%
+        );
+        margin-bottom: 1mm;
+      }
+
+      /* ─── SECTION LABEL ─── */
+      .sec-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 7.5pt;
+        letter-spacing: 2.5px;
+        color: var(--amber);
+        text-transform: uppercase;
+        margin-bottom: 3mm;
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+      }
+      .sec-label::after {
+        content: "";
+        flex: 1;
+        height: 0.3mm;
+        background: var(--border2);
+      }
+
+      /* ─── ARCHITECTURE ─── */
+      .arch-wrap {
+        margin-bottom: 6mm;
+      }
+      .arch-visual {
+        display: flex;
+        align-items: stretch;
+        gap: 2mm;
+        padding: 5mm;
+        background: var(--card2);
+        border: 0.4mm solid var(--border);
+        border-radius: 2mm;
+      }
+      .arch-layer {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5mm;
+      }
+      .arch-layer-title {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 7pt;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 2mm 2.5mm;
+        border-radius: 1mm;
+        margin-bottom: 1mm;
+      }
+      .alt-blue {
+        background: var(--blue-bg);
+        color: var(--blue);
+        border: 0.3mm solid rgba(26, 88, 166, 0.3);
+      }
+      .alt-amber {
+        background: var(--amber-bg);
+        color: var(--amber);
+        border: 0.3mm solid rgba(184, 94, 12, 0.3);
+      }
+      .alt-green {
+        background: var(--green-bg);
+        color: var(--green);
+        border: 0.3mm solid rgba(30, 104, 56, 0.3);
+      }
+      .alt-teal {
+        background: rgba(22, 96, 106, 0.07);
+        color: var(--teal);
+        border: 0.3mm solid rgba(22, 96, 106, 0.3);
+      }
+      .alt-red {
+        background: var(--red-bg);
+        color: var(--red);
+        border: 0.3mm solid rgba(166, 40, 40, 0.3);
+      }
+
+      .arch-comp {
+        background: var(--bg);
+        border: 0.3mm solid var(--border);
+        border-radius: 1.5mm;
+        padding: 2.5mm 3.5mm;
+        text-align: center;
+      }
+      .arch-comp-name {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 8.5pt;
+        color: var(--text);
+        font-weight: 500;
+        margin-bottom: 0.5mm;
+      }
+      .arch-comp-sub {
+        font-size: 7.5pt;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+      .arch-sep {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1.5mm;
+        flex-shrink: 0;
+      }
+      .arch-sep-icon {
+        font-size: 11pt;
+        color: var(--muted);
+      }
+
+      /* ─── PROBLEM BLOCKS ─── */
+      .probs-wrap {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 3.5mm;
+        margin-top: 1mm;
+      }
+      .pathclash-probs .prob-block:first-child {
+        flex: 1.3;
+      }
+      .pathclash-probs .prob-block:last-child {
+        flex: 0.82;
+      }
+      .heukgildong-probs .prob-block:first-child {
+        flex: 1.24;
+      }
+      .heukgildong-probs .prob-block:last-child {
+        flex: 0.82;
+      }
+      .prob-block {
+        flex: 1;
+        background: var(--card2);
+        border: 0.4mm solid var(--border);
+        border-radius: 2mm;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .prob-header {
+        display: flex;
+        align-items: center;
+        gap: 3.5mm;
+        padding: 4mm 5.5mm;
+        background: var(--card);
+        border-bottom: 0.4mm solid var(--border);
+        flex-shrink: 0;
+      }
+      .prob-badge {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 7pt;
+        letter-spacing: 1px;
+        background: var(--amber);
+        color: #fff8f0;
+        padding: 1mm 3mm;
+        border-radius: 0.8mm;
+        font-weight: 500;
+        flex-shrink: 0;
+      }
+      .prob-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 15pt;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.2;
+      }
+
+      /* PSR grid */
+      .psr-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.05fr 1fr;
+        flex: 1;
+      }
+      .psr-col {
+        padding: 1mm 1.5mm;
+        border-right: 0.4mm solid var(--border);
+        display: flex;
+        flex-direction: column;
+      }
+      .psr-col:last-child {
+        border-right: none;
+      }
+      .psr-col.pc {
+        border-top: 2mm solid var(--red);
+      }
+      .psr-col.sc {
+        border-top: 2mm solid var(--blue);
+      }
+      .psr-col.rc {
+        border-top: 2mm solid var(--green);
+      }
+
+      .psr-lbl {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 15pt;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 3mm;
+        flex-shrink: 0;
+        font-weight: 1000;
+      }
+      .pc .psr-lbl {
+        color: var(--red);
+      }
+      .sc .psr-lbl {
+        color: var(--blue);
+      }
+      .rc .psr-lbl {
+        color: var(--green);
+      }
+
+      .psr-list {
+        list-style: none;
+      }
+      .psr-list li {
+        font-size: 9.5pt;
+        color: var(--text2);
+        line-height: 1.7;
+        padding-left: 4mm;
+        position: relative;
+        margin-bottom: 2mm;
+      }
+      .psr-list li::before {
+        content: "—";
+        position: absolute;
+        left: 0;
+        color: var(--border2);
+        font-size: 8pt;
+        top: 0.3mm;
+      }
+
+      /* ─── BEFORE / AFTER ─── */
+      .ba-card {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin: 0 5.5mm 3mm;
+        border-radius: 1.5mm;
+        overflow: hidden;
+        border: 0.4mm solid var(--border);
+        flex-shrink: 0;
+        margin-top: 2mm;
+      }
+      .ba-side {
+        padding: 4mm 5mm;
+      }
+      .ba-before {
+        background: rgba(166, 40, 40, 0.04);
+        border-right: 0.4mm solid var(--border);
+      }
+      .ba-after {
+        background: rgba(30, 104, 56, 0.04);
+      }
+      .ba-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 7pt;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 2.5mm;
+      }
+      .ba-before .ba-label {
+        color: var(--red);
+      }
+      .ba-after .ba-label {
+        color: var(--green);
+      }
+
+      .flow-row {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.5mm;
+      }
+      .fn {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 7.5pt;
+        padding: 1.2mm 2.5mm;
+        border-radius: 1mm;
+        background: var(--bg);
+        border: 0.3mm solid var(--border);
+        color: var(--text2);
+        white-space: nowrap;
+      }
+      .fn-amber {
+        background: var(--amber-bg);
+        border-color: rgba(184, 94, 12, 0.3);
+        color: var(--amber);
+      }
+      .fn-green {
+        background: var(--green-bg);
+        border-color: rgba(30, 104, 56, 0.3);
+        color: var(--green);
+      }
+      .fn-red {
+        background: var(--red-bg);
+        border-color: rgba(166, 40, 40, 0.3);
+        color: var(--red);
+      }
+      .fa {
+        color: var(--border2);
+        font-size: 10pt;
+        line-height: 1;
+      }
+
+      /* ─── FLOW STEPS ─── */
+      .flow-steps {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.5mm;
+        padding: 3.5mm 5.5mm;
+        background: rgba(184, 94, 12, 0.04);
+        border-radius: 1.5mm;
+        margin: 0 5.5mm 3mm;
+        flex-shrink: 0;
+      }
+      .fs-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 7pt;
+        letter-spacing: 2px;
+        color: var(--amber);
+        text-transform: uppercase;
+        width: 100%;
+        margin-bottom: 2mm;
+      }
+
+      /* highlight text in result */
+      .highlight-text {
+        color: var(--amber);
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ══════════════════ COVER ══════════════════ -->
+    <div class="cover">
+      <div class="cover-top-label">Developer Portfolio · 2026</div>
+
+      <div class="cover-main">
+        <div class="cover-name-block">
+          <div class="cover-name-en">KIM<br />KIHEE</div>
+          <div class="cover-name-kr">김 기 희</div>
+        </div>
+      </div>
+
+      <div class="cover-rule"></div>
+
+      <div class="cover-body">
+        <div class="cover-tagline-block">
+          <div class="cover-tagline">
+            문제를 분석하고 구조를 개선하며<br />
+            결과로 증명하는 개발자
+          </div>
+          <div class="cover-contacts">
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value">ter2490@naver.com</div>
+            </div>
+            <div>
+              <div class="contact-label">Phone</div>
+              <div class="contact-value">010-8979-2736</div>
+            </div>
+            <div>
+              <div class="contact-label">GitHub</div>
+              <div class="contact-value">
+                <a href="https://github.com/darkflame265"
+                  >github.com/darkflame265</a
+                >
+              </div>
+            </div>
+            <div>
+              <div class="contact-label">Portfolio</div>
+              <div class="contact-value">
+                <a href="https://darkflame265.github.io/07_portfolio_site/"
+                  >darkflame265.github.io</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cover-stack-numbers">
+          <div class="stack-num">01</div>
+          <div class="stack-num">02</div>
+          <div class="stack-num">03</div>
+        </div>
+      </div>
+
+      <div class="cover-footer">
+        <div class="cover-footer-item">Backend</div>
+        <div class="cover-footer-dot"></div>
+        <div class="cover-footer-item">Game Dev</div>
+        <div class="cover-footer-dot"></div>
+        <div class="cover-footer-item">Web</div>
+        <div class="cover-footer-dot"></div>
+        <div class="cover-footer-item">Reinforcement Learning</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ PROJECT 1: PathClash ══════════════════ -->
+    <div class="proj-page">
+      <div class="proj-num">01 — Project</div>
+      <div class="proj-title">PathClash</div>
+      <div class="proj-desc">
+        Supabase 중심 실시간 구조의 지연 문제를 Socket.IO 전용 게임 서버로
+        재설계하고, 반응형 UI 및 모바일 UX를 개선한 실시간 PvP 웹 보드 게임.
+        <a href="https://pathclash.com">pathclash.com</a>
+      </div>
+      <div class="proj-rule"></div>
+
+      <div class="arch-wrap">
+        <div class="sec-label">Architecture</div>
+        <div class="arch-visual">
+          <div class="arch-layer">
+            <div class="arch-layer-title alt-blue">Client · Next.js</div>
+            <div class="arch-comp">
+              <div class="arch-comp-name">UI 컴포넌트</div>
+            </div>
+            <div class="arch-comp">
+              <div class="arch-comp-name">Socket.IO Client</div>
+            </div>
+          </div>
+          <div class="arch-sep"><div class="arch-sep-icon">⇄</div></div>
+          <div class="arch-layer">
+            <div class="arch-layer-title alt-amber">
+              Game Server · Socket.IO
+            </div>
+            <div class="arch-comp">
+              <div class="arch-comp-name">이벤트 핸들러</div>
+            </div>
+            <div class="arch-comp">
+              <div class="arch-comp-name">게임 상태</div>
+              <div class="arch-comp-sub">메모리</div>
+            </div>
+          </div>
+          <div class="arch-sep">
+            <div class="arch-sep-icon" style="font-size: 9pt">→</div>
+          </div>
+          <div class="arch-layer">
+            <div class="arch-layer-title alt-green">Supabase</div>
+            <div class="arch-comp"><div class="arch-comp-name">인증</div></div>
+            <div class="arch-comp">
+              <div class="arch-comp-name">유저 데이터</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-label">Problems &amp; Solutions</div>
+      <div class="probs-wrap pathclash-probs">
+        <div class="prob-block">
+          <div class="prob-header">
+            <span class="prob-badge">PROBLEM 01</span>
+            <span class="prob-title">Supabase 실시간 구조 지연</span>
+          </div>
+          <div class="ba-card">
+            <div class="ba-side ba-before">
+              <div class="ba-label">Before · Supabase Realtime</div>
+              <div class="flow-row">
+                <div class="fn">클라이언트</div>
+                <div class="fa">→</div>
+                <div class="fn">Supabase API</div>
+                <div class="fa">→</div>
+                <div class="fn">PostgreSQL</div>
+                <div class="fa">→</div>
+                <div class="fn">Realtime 이벤트</div>
+                <div class="fa">→</div>
+                <div class="fn">클라이언트</div>
+              </div>
+            </div>
+            <div class="ba-side ba-after">
+              <div class="ba-label">After · Socket.IO</div>
+              <div class="flow-row">
+                <div class="fn">클라이언트</div>
+                <div class="fa">⇄</div>
+                <div class="fn fn-amber">Socket.IO 서버</div>
+                <div class="fa">⇄</div>
+                <div class="fn fn-green">게임 상태 (메모리)</div>
+              </div>
+            </div>
+          </div>
+          <div class="psr-grid">
+            <div class="psr-col pc">
+              <div class="psr-lbl">문제</div>
+              <ul class="psr-list">
+                <li>
+                  Supabase Realtime 기반에서 체감 지연 발생(체감 2초 이상)
+                </li>
+                <li>
+                  매번 DB를 조회하여 데이터를 가져오는 행위 자체가 지연 원인.
+                </li>
+                <li>실시간 PvP 특성상 지연이 플레이 경험에 직접 영향</li>
+              </ul>
+            </div>
+            <div class="psr-col sc">
+              <div class="psr-lbl">해결</div>
+              <ul class="psr-list">
+                <li>Socket.IO 기반 전용 게임 서버로 아키텍처 재설계</li>
+                <li>
+                  HTTP 요청 반복이 아니라 소켓 연결 하나를 계속 사용하여 통신
+                </li>
+                <li>supabase는 유저 로그인, 전적 갱신 할 때만 사용.</li>
+              </ul>
+            </div>
+            <div class="psr-col rc">
+              <div class="psr-lbl">결과</div>
+              <ul class="psr-list">
+                <li>실시간 이벤트 처리 지연 감소 및 입력 반응 속도 개선</li>
+                <li>구조 단순화를 통한 안정적인 실시간 동기화 달성</li>
+                <li>
+                  기존 2초였던 대기 체감시간이 전환 후, 거의 느껴지지 않을 만큼
+                  좋아짐.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="prob-block">
+          <div class="prob-header">
+            <span class="prob-badge">PROBLEM 02</span>
+            <span class="prob-title">적응형 레이아웃 적용</span>
+          </div>
+          <div class="psr-grid">
+            <div class="psr-col pc">
+              <div class="psr-lbl">문제</div>
+              <ul class="psr-list">
+                <li>
+                  데스크탑에선 정상인 UI가 모바일·태블릿에서 레이아웃 깨짐
+                </li>
+                <li>보드 영역 오버플로우 및 컴포넌트 비율 불일치</li>
+                <li>멀티 디바이스 접근 시 사용자 경험 저하</li>
+              </ul>
+            </div>
+            <div class="psr-col sc">
+              <div class="psr-lbl">해결</div>
+              <ul class="psr-list">
+                <li>Figma 오토 레이아웃 개념 참고, UI 구조 반응형 재설계</li>
+                <li>고정 px 레이아웃을 비율 기반·flex/grid 구조로 전환</li>
+                <li>뷰포트 단위·미디어 쿼리로 디바이스별 UI 대응 구현</li>
+              </ul>
+            </div>
+            <div class="psr-col rc">
+              <div class="psr-lbl">결과</div>
+              <ul class="psr-list">
+                <li>모바일·태블릿·데스크탑 전 환경에서 UI 정상 출력</li>
+                <li>디바이스 해상도에 따른 레이아웃 깨짐 문제 해결</li>
+                <li>멀티 디바이스 대응 웹 게임 UI 설계 경험 확보</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ PROJECT 2: 흑길동 ══════════════════ -->
+    <div class="proj-page">
+      <div class="proj-num">02 — Project</div>
+      <div class="proj-title">흑길동 : 대유쾌마운틴</div>
+      <div class="proj-desc">
+        점프 입력 누락 문제를 점프 버퍼 로직으로 해결하고, 테스터 피드백 기반
+        레벨 디자인을 개선한 Unity 2D 플랫포머 게임.
+      </div>
+      <div class="proj-rule"></div>
+
+      <div class="arch-wrap">
+        <div class="sec-label">Architecture · Unity Component Structure</div>
+        <div class="arch-visual">
+          <div class="arch-layer">
+            <div class="arch-layer-title alt-blue">Input</div>
+            <div class="arch-comp">
+              <div class="arch-comp-name">InputManager</div>
+              <div class="arch-comp-sub">입력 처리</div>
+            </div>
+          </div>
+          <div class="arch-sep">
+            <div class="arch-sep-icon" style="font-size: 9pt">→</div>
+          </div>
+          <div class="arch-layer">
+            <div class="arch-layer-title alt-amber">Buffer</div>
+            <div class="arch-comp">
+              <div class="arch-comp-name">JumpBuffer</div>
+              <div class="arch-comp-sub">코루틴</div>
+            </div>
+          </div>
+          <div class="arch-sep">
+            <div class="arch-sep-icon" style="font-size: 9pt">→</div>
+          </div>
+          <div class="arch-layer" style="flex: 1.4">
+            <div class="arch-layer-title alt-teal">Control</div>
+            <div class="arch-comp">
+              <div class="arch-comp-name">CharacterController</div>
+              <div class="arch-comp-sub">캐릭터 컨트롤</div>
+            </div>
+            <div class="arch-comp">
+              <div class="arch-comp-name">GroundCheck</div>
+              <div class="arch-comp-sub">지면 판정</div>
+            </div>
+          </div>
+          <div class="arch-sep">
+            <div class="arch-sep-icon" style="font-size: 9pt">→</div>
+          </div>
+          <div class="arch-layer">
+            <div class="arch-layer-title alt-green">Output</div>
+            <div class="arch-comp">
+              <div class="arch-comp-name">PhysicsSystem</div>
+              <div class="arch-comp-sub">물리 엔진</div>
+            </div>
+            <div class="arch-comp">
+              <div class="arch-comp-name">Animator</div>
+              <div class="arch-comp-sub">애니메이션</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-label">Problems &amp; Solutions</div>
+      <div class="probs-wrap heukgildong-probs">
+        <div class="prob-block">
+          <div class="prob-header">
+            <span class="prob-badge">PROBLEM 01</span>
+            <span class="prob-title"
+              >내리막길에서 캐릭터의 점프 입력이 누락되는 문제</span
+            >
+          </div>
+          <div class="flow-steps">
+            <div class="fs-label">Jump Buffer Processing Flow</div>
+            <div class="fn">지면 접촉 상태</div>
+            <div class="fa">→</div>
+            <div class="fn fn-red">
+              내리막/고속 이동 중 순간적으로 지면 이탈
+            </div>
+            <div class="fa">→</div>
+            <div class="fn fn-amber">Coyote Timer 시작<br />(0.3s 코루틴)</div>
+            <div class="fa">→</div>
+            <div class="fn fn-green">
+              [0.3s 동안] 점프 입력 감지 시<br />점프 실행
+            </div>
+            <div class="fa">→</div>
+            <div class="fn">
+              점프 입력이 없으면 타이머 종료<br />→ 이후 일반 규칙 적용
+            </div>
+          </div>
+          <div class="psr-grid">
+            <div class="psr-col pc">
+              <div class="psr-lbl">문제</div>
+              <ul class="psr-list">
+                <li>내리막길 고속 이동 중 점프 입력 간헐적 무시</li>
+                <li>속도가 빨라질수록 점프 입력 누락 빈도 증가</li>
+                <li>원인은 지면 판정이 순간적으로 해제되며 점프 조건 미충족</li>
+              </ul>
+            </div>
+            <div class="psr-col sc">
+              <div class="psr-lbl">해결</div>
+              <ul class="psr-list">
+                <li>
+                  지면 접촉 여부와 무관하게 일정 시간 점프 입력을 유효 처리하는
+                  로직 설계
+                </li>
+                <li>코루틴으로 지면 이탈 후 0.3초 이내 입력을 점프로 처리</li>
+                <li>
+                  고속 이동 상황에서도 입력 손실 없도록 캐릭터 컨트롤 보정
+                </li>
+              </ul>
+            </div>
+            <div class="psr-col rc">
+              <div class="psr-lbl">결과</div>
+              <ul class="psr-list">
+                <li>내리막길 고속 이동 중 점프 입력 안정성 확보</li>
+                <li>플랫포머 조작감 개선 및 플레이 난이도 안정화</li>
+                <li>Unity 캐릭터 컨트롤 및 물리 보정 경험 확보</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="prob-block">
+          <div class="prob-header">
+            <span class="prob-badge">PROBLEM 02</span>
+            <span class="prob-title">길찾기 혼란 (테스터 피드백)</span>
+          </div>
+          <div class="psr-grid">
+            <div class="psr-col pc">
+              <div class="psr-lbl">문제</div>
+              <ul class="psr-list">
+                <li>
+                  플레이 테스트 중 맵 내 진행 경로 파악이 어렵다는 피드백 다수
+                  발생
+                </li>
+                <li>
+                  지형 구조만으로는 올바른 루트를 직관적으로 인지하기 어려움
+                </li>
+                <li>길찾기 혼란으로 플레이 흐름 단절 및 반복 이탈 발생</li>
+              </ul>
+            </div>
+            <div class="psr-col sc">
+              <div class="psr-lbl">해결</div>
+              <ul class="psr-list">
+                <li>
+                  올바른 진행 경로 주변에 시각적 기준점 역할의 환경 오브젝트
+                  배치
+                </li>
+                <li>
+                  버섯 오브젝트를 길 유도 요소로 활용하여 자연스러운 동선 설계
+                </li>
+                <li>발광 효과 추가로 가시성과 존재감 강화</li>
+              </ul>
+            </div>
+            <div class="psr-col rc">
+              <div class="psr-lbl">결과</div>
+              <ul class="psr-list">
+                <li>플레이어의 진행 경로 인지율 개선</li>
+                <li>맵 탐색 스트레스 감소 및 플레이 흐름 안정화</li>
+                <li>레벨 디자인 및 플레이어 유도 설계 경험 확보</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ PROJECT 3: 05_avoid_game ══════════════════ -->
+    <div class="proj-page">
+      <div class="proj-num">03 — Project</div>
+      <div class="proj-title">05_avoid_game</div>
+      <div class="proj-desc">
+        CNN 기반 학습의 성능 한계를 분석하고 MLP 기반 구조로 재설계하여 회피 AI
+        성능을 개선하고, GPU 병렬 학습으로 강화학습 속도를 대폭 향상시킨
+        프로젝트.
+      </div>
+      <div class="proj-rule"></div>
+
+      <div class="sec-label">Problems &amp; Solutions</div>
+      <div class="probs-wrap">
+        <div class="prob-block">
+          <div class="prob-header">
+            <span class="prob-badge">PROBLEM 01</span>
+            <span class="prob-title"
+              >CNN 기반 학습 성능 한계, MLP 기반 학습 전환</span
+            >
+          </div>
+          <div class="ba-card">
+            <div class="ba-side ba-before">
+              <div class="ba-label">CNN 구조 (Before)</div>
+              <div class="flow-row">
+                <div class="fn fn-red">
+                  이미지 기반 학습<br />(연속된 이미지로 정보 습득)
+                </div>
+              </div>
+            </div>
+            <div class="ba-side ba-after">
+              <div class="ba-label">MLP 구조 (After)</div>
+              <div class="flow-row">
+                <div class="fn fn-green">
+                  벡터 기반 학습<br />(이미지 없이 숫자로만 학습)
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="psr-grid">
+            <div class="psr-col pc">
+              <div class="psr-lbl">문제</div>
+              <ul class="psr-list">
+                <li>CNN 기반 이미지 입력 구조로 탄막 회피 AI 학습 진행</li>
+                <li>장시간 학습에도 회피 성능이 개선되지 않는 문제 발생</li>
+                <li>
+                  이미지 기반 고차원 입력으로 학습 효율이 낮은 구조적 한계 확인
+                </li>
+              </ul>
+            </div>
+            <div class="psr-col sc">
+              <div class="psr-lbl">해결</div>
+              <ul class="psr-list">
+                <li>문제 원인을 모델 구조로 판단하고 학습 구조 전면 재설계</li>
+                <li>
+                  이미지 입력 대신 상태 기반 피처를 활용한 MLP 구조로 전환
+                </li>
+                <li>저차원 상태 입력 기반 강화학습 환경으로 재구성</li>
+              </ul>
+            </div>
+            <div class="psr-col rc">
+              <div class="psr-lbl">결과</div>
+              <ul class="psr-list">
+                <li>MLP 기반 학습에서 안정적인 회피 행동 학습 확인</li>
+                <li>CNN 대비 학습 효율 및 성능 개선 달성</li>
+                <li>모델 선택과 입력 구조 설계의 중요성 경험 확보</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="prob-block">
+          <div class="prob-header">
+            <span class="prob-badge">PROBLEM 02</span>
+            <span class="prob-title"
+              >CPU 단일 환경 학습 병목, GPU 병렬 환경 학습 전환</span
+            >
+          </div>
+          <div class="ba-card">
+            <div class="ba-side ba-before">
+              <div class="ba-label">CPU 기반 단일 환경 학습 (Before)</div>
+              <div class="flow-row">
+                <div class="fn fn-red">
+                  학습 속도는 빠르지만, 한 번에 하나의<br />
+                  에이전트만 학습되어 속도 병목 발생
+                </div>
+              </div>
+            </div>
+            <div class="ba-side ba-after">
+              <div class="ba-label">GPU 기반 병렬 환경 학습 (After)</div>
+              <div class="flow-row">
+                <div class="fn fn-green">
+                  학습 속도는 느리지만, 32개의 환경을 동시에<br />
+                  학습하여 속도 병목 해결
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="psr-grid">
+            <div class="psr-col pc">
+              <div class="psr-lbl">문제</div>
+              <ul class="psr-list">
+                <li>CPU 기반 단일 환경 학습 구조로 전체 학습 속도 저하</li>
+                <li>한 번에 하나의 에이전트만 학습되어 속도 병목 발생</li>
+                <li>장시간 학습에도 충분한 학습 스텝 확보가 어려운 문제</li>
+              </ul>
+            </div>
+            <div class="psr-col sc">
+              <div class="psr-lbl">해결</div>
+              <ul class="psr-list">
+                <li>CUDA 기반 GPU 연산을 활용한 학습 구조로 전환</li>
+                <li>
+                  벡터 환경(vec env) 도입으로 32개 환경 병렬 강화학습 구현
+                </li>
+                <li>32개 환경 동시 실행 학습 파이프라인 재구성</li>
+              </ul>
+            </div>
+            <div class="psr-col rc">
+              <div class="psr-lbl">결과</div>
+              <ul class="psr-list">
+                <li>
+                  <span class="highlight-text"
+                    >학습 속도 약 30배 이상 향상</span
+                  >
+                </li>
+                <li>수십만 스텝 이상의 대규모 학습 수행 가능</li>
+                <li>병렬 강화학습 및 학습 인프라 최적화 경험 확보</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
