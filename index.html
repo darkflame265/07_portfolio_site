@@ -1403,11 +1403,12 @@
           title: "08_Path Clash",
           desc: "두 플레이어가 1:1로 경로를 작성하며, 상대를 맞추거나 피하는 TBS Game(턴제 전략 게임) 입니다.",
           category: "web",
-          date: "2026.03.01",
+          date: "2026.08.05",
           thumbnail: "site_Thumbnail/08_PathClash.png",
           links: {
-            github: "https://github.com/darkflame265/08_PathClash",
             site: "https://pathclash.com/",
+            playStore:
+              "https://play.google.com/store/apps/details?id=com.pathclash.game",
           },
         },
       ];
@@ -1433,6 +1434,7 @@
         video: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
         download: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
         site: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+        playStore: `<svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M4.3 3.1c-.2.3-.3.7-.3 1.2v15.4c0 .5.1.9.3 1.2l8.5-8.9-8.5-8.9z"/><path d="M14 10.8 16.4 8 6.1 2.2c-.3-.2-.6-.2-.9-.2l8.8 8.8z"/><path d="m14 13.2-8.8 8.8c.3 0 .6 0 .9-.2L16.4 16 14 13.2z"/><path d="M19.5 10.1 17.8 9l-2.6 3 2.6 3 1.7-1.1c1.4-.8 1.4-3 0-3.8z"/></svg>`,
       };
 
       /* ───────────────────────────────────
@@ -1462,6 +1464,10 @@
           linkButtons.push(
             `<a href="${p.links.site}" target="_blank" rel="noopener" class="card-link" aria-label="사이트">${ICONS.site} 사이트</a>`,
           );
+        if (p.links.playStore)
+          linkButtons.push(
+            `<a href="${p.links.playStore}" target="_blank" rel="noopener" class="card-link" aria-label="Play Store">${ICONS.playStore} Play Store</a>`,
+          );
 
         const thumbStyle = p.thumbnail
           ? `background-image:url('${p.thumbnail}')`
@@ -1485,7 +1491,12 @@
         const grid = document.getElementById("projectGrid");
         const filtered =
           cat === "all" ? PROJECTS : PROJECTS.filter((p) => p.category === cat);
-        grid.innerHTML = filtered.map(createCard).join("");
+        const sorted = [...filtered].sort(
+          (a, b) =>
+            Number(b.date.replaceAll(".", "")) -
+            Number(a.date.replaceAll(".", "")),
+        );
+        grid.innerHTML = sorted.map(createCard).join("");
 
         // Re-run reveal observer on new cards
         grid
