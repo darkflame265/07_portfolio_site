@@ -1199,17 +1199,17 @@
           </div>
           <div class="stat-divider" aria-hidden="true"></div>
           <div class="stat">
-            <span class="stat-n">3</span>
+            <span class="stat-n" id="stat-unity">3</span>
             <span class="stat-l">Unity</span>
           </div>
           <div class="stat-divider" aria-hidden="true"></div>
           <div class="stat">
-            <span class="stat-n">4</span>
+            <span class="stat-n" id="stat-ai">5</span>
             <span class="stat-l">AI</span>
           </div>
           <div class="stat-divider" aria-hidden="true"></div>
           <div class="stat">
-            <span class="stat-n">1</span>
+            <span class="stat-n" id="stat-web">1</span>
             <span class="stat-l">Web</span>
           </div>
         </div>
@@ -1241,13 +1241,13 @@
 
       <div class="tabs-row reveal" id="tabsRow">
         <button class="tab-btn active" data-cat="all">
-          전체 <span class="tab-count" id="count-all">8</span>
+          전체 <span class="tab-count" id="count-all">9</span>
         </button>
         <button class="tab-btn" data-cat="unity">
           Unity <span class="tab-count" id="count-unity">3</span>
         </button>
         <button class="tab-btn" data-cat="ai">
-          AI <span class="tab-count" id="count-ai">4</span>
+          AI <span class="tab-count" id="count-ai">5</span>
         </button>
         <button class="tab-btn" data-cat="web">
           Web <span class="tab-count" id="count-web">1</span>
@@ -1411,6 +1411,18 @@
               "https://play.google.com/store/apps/details?id=com.pathclash.game",
           },
         },
+        {
+          id: "quoridor-ai-studio",
+          title: "Quoridor AI Studio",
+          desc: "외부 SigmaQuoridor 기반에 UI·웹 실행을 통합했습니다. AI 대전·기보 복기·쉬운 추천 설명을 지원합니다.",
+          category: "ai",
+          date: "2026.11.06",
+          thumbnail: "site_Thumbnail/quoridor-thumbnail.webp",
+          links: {
+            github: "https://github.com/darkflame265/12_quoridor_ai",
+            site: "https://darkflame265.github.io/12_quoridor_ai/",
+          },
+        },
       ];
 
       /* ───────────────────────────────────
@@ -1502,6 +1514,17 @@
         grid
           .querySelectorAll(".reveal")
           .forEach((el) => revealObserver.observe(el));
+      }
+
+      function updateProjectCounts() {
+        const counts = { all: PROJECTS.length, unity: 0, ai: 0, web: 0 };
+        PROJECTS.forEach((project) => counts[project.category]++);
+        Object.entries(counts).forEach(([category, count]) => {
+          document.getElementById(`count-${category}`).textContent = count;
+          if (category !== "all") {
+            document.getElementById(`stat-${category}`).textContent = count;
+          }
+        });
       }
 
       /* ───────────────────────────────────
@@ -1610,7 +1633,8 @@
         }, 16);
       }
       setTimeout(
-        () => animateCount(document.getElementById("stat-total"), 8, 800),
+        () =>
+          animateCount(document.getElementById("stat-total"), PROJECTS.length, 800),
         600,
       );
 
@@ -1643,6 +1667,7 @@
       /* ───────────────────────────────────
        INIT
     ─────────────────────────────────── */
+      updateProjectCounts();
       renderProjects("all");
       renderSkills();
     </script>
