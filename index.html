@@ -697,6 +697,8 @@
       }
 
       .card {
+        display: flex;
+        flex-direction: column;
         background: var(--surface);
         border: 1px solid var(--border);
         border-radius: 16px;
@@ -879,32 +881,63 @@
       }
 
       .card-footer {
-        display: flex;
-        gap: 7px;
-        padding: 11px 18px 15px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(132px, 100%), 1fr));
+        gap: 8px;
+        margin-top: auto;
+        padding: 14px 16px 16px;
         border-top: 1px solid var(--border);
       }
       .card-link {
+        --button-accent: #c4b5fd;
         display: inline-flex;
         align-items: center;
-        gap: 5px;
-        font-size: 0.75rem;
-        color: var(--text-2);
-        border: 1px solid var(--border);
-        background: var(--surface-2);
-        border-radius: 7px;
-        padding: 4px 10px;
-        transition: all 0.2s;
+        justify-content: center;
+        gap: 8px;
+        min-height: 44px;
+        min-width: 0;
+        font-family: var(--font-body);
+        font-size: 0.875rem;
+        font-weight: 600;
+        white-space: nowrap;
+        color: var(--text-1);
+        border: 1px solid color-mix(in srgb, var(--button-accent) 32%, var(--border));
+        background: color-mix(in srgb, var(--button-accent) 9%, var(--surface));
+        border-radius: 8px;
+        padding: 9px 12px;
+        transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+      }
+      .card-link:only-child {
+        justify-self: start;
+        min-width: min(132px, 100%);
+        max-width: 100%;
+      }
+      .card-link:last-child:nth-child(3) {
+        grid-column: 1 / -1;
       }
       .card-link svg {
-        width: 12px;
-        height: 12px;
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+        color: var(--button-accent);
       }
       .card-link:hover {
-        color: var(--text-1);
-        border-color: var(--primary);
-        background: var(--primary-dim);
+        border-color: var(--button-accent);
+        background: color-mix(in srgb, var(--button-accent) 18%, var(--surface));
       }
+      .card-link:focus-visible {
+        outline: 2px solid var(--button-accent);
+        outline-offset: 3px;
+      }
+      .card-link--video { --button-accent: #ff938c; }
+      .card-link--download { --button-accent: #6ee7a0; }
+      .card-link--site { --button-accent: #67e8f9; }
+      .card-link--play-store { --button-accent: #8dd9b3; }
+      [data-theme="light"] .card-link { --button-accent: #6d28d9; }
+      [data-theme="light"] .card-link--video { --button-accent: #c13430; }
+      [data-theme="light"] .card-link--download { --button-accent: #167444; }
+      [data-theme="light"] .card-link--site { --button-accent: #08768a; }
+      [data-theme="light"] .card-link--play-store { --button-accent: #167444; }
 
       /* Hidden cards */
       .card.hidden {
@@ -941,9 +974,21 @@
         align-items: baseline;
       }
       .skill-name {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         font-size: 0.9rem;
         font-weight: 600;
         color: var(--text-1);
+      }
+      .skill-logo {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+        filter: invert(1);
+      }
+      [data-theme="light"] .skill-logo {
+        filter: none;
       }
       .skill-pct {
         font-family: var(--font-mono);
@@ -1436,6 +1481,7 @@
         { name: "PyTorch", pct: 20, icon: "🔥" },
         { name: "Blender", pct: 30, icon: "🧊" },
         { name: "Claude", pct: 40, icon: "🤖" },
+        { name: "Codex", pct: 80, icon: '<img class="skill-logo" src="assets/icons/codex.svg" alt="" aria-hidden="true" />' },
       ];
 
       /* ───────────────────────────────────
@@ -1446,7 +1492,7 @@
         video: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
         download: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
         site: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
-        playStore: `<svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M4.3 3.1c-.2.3-.3.7-.3 1.2v15.4c0 .5.1.9.3 1.2l8.5-8.9-8.5-8.9z"/><path d="M14 10.8 16.4 8 6.1 2.2c-.3-.2-.6-.2-.9-.2l8.8 8.8z"/><path d="m14 13.2-8.8 8.8c.3 0 .6 0 .9-.2L16.4 16 14 13.2z"/><path d="M19.5 10.1 17.8 9l-2.6 3 2.6 3 1.7-1.1c1.4-.8 1.4-3 0-3.8z"/></svg>`,
+        playStore: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285f4" d="M4.3 3.1c-.2.3-.3.7-.3 1.2v15.4c0 .5.1.9.3 1.2l8.5-8.9-8.5-8.9z"/><path fill="#34a853" d="M14 10.8 16.4 8 6.1 2.2c-.3-.2-.6-.2-.9-.2l8.8 8.8z"/><path fill="#ea4335" d="m14 13.2-8.8 8.8c.3 0 .6 0 .9-.2L16.4 16 14 13.2z"/><path fill="#fbbc04" d="M19.5 10.1 17.8 9l-2.6 3 2.6 3 1.7-1.1c1.4-.8 1.4-3 0-3.8z"/></svg>`,
       };
 
       /* ───────────────────────────────────
@@ -1462,23 +1508,23 @@
         const linkButtons = [];
         if (p.links.github)
           linkButtons.push(
-            `<a href="${p.links.github}" target="_blank" rel="noopener" class="card-link" aria-label="GitHub">${ICONS.github} GitHub</a>`,
+            `<a href="${p.links.github}" target="_blank" rel="noopener" class="card-link card-link--github" aria-label="GitHub">${ICONS.github} GitHub</a>`,
           );
         if (p.links.video)
           linkButtons.push(
-            `<a href="${p.links.video}" target="_blank" rel="noopener" class="card-link" aria-label="영상">${ICONS.video} 영상</a>`,
+            `<a href="${p.links.video}" target="_blank" rel="noopener" class="card-link card-link--video" aria-label="영상 보기">${ICONS.video} 영상 보기</a>`,
           );
         if (p.links.download)
           linkButtons.push(
-            `<a href="${p.links.download}" target="_blank" rel="noopener" class="card-link" aria-label="다운로드">${ICONS.download} .exe</a>`,
+            `<a href="${p.links.download}" target="_blank" rel="noopener" class="card-link card-link--download" aria-label="다운로드">${ICONS.download} 다운로드</a>`,
           );
         if (p.links.site)
           linkButtons.push(
-            `<a href="${p.links.site}" target="_blank" rel="noopener" class="card-link" aria-label="사이트">${ICONS.site} 사이트</a>`,
+            `<a href="${p.links.site}" target="_blank" rel="noopener" class="card-link card-link--site" aria-label="사이트 방문">${ICONS.site} 사이트 방문</a>`,
           );
         if (p.links.playStore)
           linkButtons.push(
-            `<a href="${p.links.playStore}" target="_blank" rel="noopener" class="card-link" aria-label="Play Store">${ICONS.playStore} Play Store</a>`,
+            `<a href="${p.links.playStore}" target="_blank" rel="noopener" class="card-link card-link--play-store" aria-label="Google Play">${ICONS.playStore} Google Play</a>`,
           );
 
         const thumbStyle = p.thumbnail
